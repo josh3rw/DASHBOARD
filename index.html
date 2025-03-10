@@ -25,7 +25,12 @@
             transform: scale(1.05);
         }
         body {
-            background: url('https://static.square-enix-games.com/ffviir-backdrops/ffviir-zoom-midgar-city.jpg') no-repeat center center fixed; background-size: cover; color: white; font-family: 'Cinzel', serif;
+            background: url('https://static.square-enix-games.com/ffviir-backdrops/ffviir-zoom-midgar-city.jpg') no-repeat center center fixed; 
+            background-size: cover; 
+            color: white; 
+            font-family: 'Cinzel', serif; 
+            display: flex; 
+            justify-content: center;
         }
         .container { width: 80%; margin: auto; text-align: center; }
         .panel {
@@ -45,13 +50,16 @@
     </style>
 <audio id="bg-music" autoplay loop>
     <source src="https://files.catbox.moe/9dvwht.mp3" type="audio/mpeg">
+</audio><audio id="level-up-sound">
+    <source src="https://files.catbox.moe/n5zb64.mp3" type="audio/mpeg">
 </audio></head>
 <body>
     <div class="panel container">
-        <h1>⚔️ Peak Performance ⚔️</h1>
+        <h1>Peak Performance</h1>
 
         <div class="panel">
-            <div class="accent-symbol" style="position: absolute; top: 0; left: 0; border-top: 2px solid gold; border-left: 2px solid gold; border-radius: 10px; width: 15px; height: 15px;"></div><div class="accent-symbol" style="position: absolute; top: 0; left: 0; width: 50px; height: 50px; border-top: 3px solid gold; border-left: 3px solid gold; border-radius: 0 0 15px 0; transform: rotate(45deg);"></div><h2>⚔️ Character Status</h2>
+            <div class="accent-symbol" style="position: absolute; top: 0; left: 0; border-top: 2px solid gold; border-left: 2px solid gold; border-radius: 10px; width: 15px; height: 15px;"></div>
+            <h2>⚔️ Character Status</h2>
             <p>Job: <strong id="rank">Novice</strong></p>
             <p>Level: <strong id="level">1</strong></p>
             <p>XP: <strong id="xp">0 / 100</strong></p>
@@ -68,7 +76,8 @@
         </div>
 
         <div class="panel">
-            <div class="accent-symbol" style="position: absolute; top: 0; right: 0; border-top: 2px solid gold; border-right: 2px solid gold; border-radius: 10px; width: 15px; height: 15px;"></div><div class="accent-symbol" style="position: absolute; top: 0; right: 0; width: 50px; height: 50px; border-top: 3px solid gold; border-right: 3px solid gold; border-radius: 0 0 0 15px; transform: rotate(45deg);"></div><h2>🧠 Skill Progression</h2>
+            <div class="accent-symbol" style="position: absolute; top: 0; right: 0; border-top: 2px solid gold; border-right: 2px solid gold; border-radius: 10px; width: 15px; height: 15px;"></div>
+            <h2>🧠 Skill Progression</h2>
             <div style="margin-bottom: 15px;">Reaction<div class="progress"><div class="progress-bar" id="reaction-bar" style="width:0%"></div></div></div>
             <div style="margin-bottom: 15px;">Memory<div class="progress"><div class="progress-bar" id="memory-bar" style="width:0%;"></div></div></div>
             <div style="margin-bottom: 15px;">Control<div class="progress"><div class="progress-bar" id="control-bar" style="width:0%;"></div></div></div>
@@ -78,18 +87,27 @@
         <div class="panel quests">
             <div class="panel">
                 <h3>🌟 Daily Quest</h3>
-                <p id="daily-quest">Loading...</p>
-                <p>Reward: +50 XP</p>
+                <p id="daily-quest">Complete 5 Reaction Drills</p>
+                <div class="progress" style="width: 100%; margin: auto;">
+                <div class="progress-bar" id="daily-progress-bar" style="width: 0%; transition: width 0.5s ease;"></div>
+            </div>
+<p>Reward: +50 XP</p>
             </div>
             <div class="panel">
                 <h3>🕒 Weekly Quest</h3>
-                <p id="weekly-quest">Loading...</p>
-                <p>Reward: +250 XP</p>
+                <p id="weekly-quest">Maintain 90% Memory Accuracy for a Week</p>
+                <div class="progress" style="width: 100%; margin: auto;">
+                <div class="progress-bar" id="weekly-progress-bar" style="width: 0%; transition: width 0.5s ease;"></div>
+            </div>
+<p>Reward: +250 XP</p>
             </div>
             <div class="panel">
                 <h3>📅 Monthly Quest</h3>
-                <p id="monthly-quest">Loading...</p>
-                <p>Reward: +1000 XP, Rank Promotion</p>
+                <p id="monthly-quest">Reach Level 5</p>
+                <div class="progress" style="width: 100%; margin: auto;">
+                <div class="progress-bar" id="monthly-progress-bar" style="width: 0%; transition: width 0.5s ease;"></div>
+            </div>
+<p>Reward: +1000 XP, Rank Promotion</p>
             </div>
         </div>
 
@@ -109,7 +127,8 @@
         </div>
 
         <div class="panel">
-            <div class="accent-symbol" style="position: absolute; bottom: 0; left: 0; border-bottom: 2px solid gold; border-left: 2px solid gold; border-radius: 10px; width: 15px; height: 15px;"></div><h2>📝 Log Today's Performance</h2>
+            <div class="accent-symbol" style="position: absolute; bottom: 0; left: 0; border-bottom: 2px solid gold; border-left: 2px solid gold; border-radius: 10px; width: 15px; height: 15px;"></div>
+            <h2>📝 Log Today's Performance</h2>
             <form>
                 Reaction Time (ms):<br><input type="number" id="reaction"><br>
                 Memory Score (%):<br><input type="number" id="memory"><br>
