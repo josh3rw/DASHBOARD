@@ -227,6 +227,59 @@
             document.getElementById("rank").innerText = job;
             updateStats(level);
         }
+    
+        function logPerformance() {
+            let reactionValue = parseInt(document.getElementById("reaction").value) || 0;
+            let memoryValue = parseInt(document.getElementById("memory").value) || 0;
+            let cognitiveValue = parseInt(document.getElementById("cognitive").value) || 0;
+            
+            updateGraph("reactionGraph", reactionValue);
+            updateGraph("memoryGraph", memoryValue);
+            updateGraph("cognitiveGraph", cognitiveValue);
+            
+            updateProgress("reaction-bar", reactionValue);
+            updateProgress("memory-bar", memoryValue);
+            updateProgress("control-bar", cognitiveValue);
+            
+            grantXP(10);
+        }
+        
+        function updateGraph(canvasId, newValue) {
+            let canvas = document.getElementById(canvasId);
+            let ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = "gold";
+            ctx.fillRect(10, canvas.height - newValue, 50, newValue);
+        }
+        
+        function updateProgress(barId, value) {
+            let bar = document.getElementById(barId);
+            let percentage = Math.min(100, value);
+            bar.style.width = percentage + "%";
+        }
+        
+        function grantXP(amount) {
+            let xpElement = document.getElementById("xp");
+            let xpBar = document.getElementById("xp-bar");
+            let currentXP = parseInt(xpElement.innerText.split("/")[0]);
+            let maxXP = parseInt(xpElement.innerText.split("/")[1]);
+            
+            currentXP += amount;
+            if (currentXP >= maxXP) {
+                currentXP = currentXP - maxXP;
+                let levelElement = document.getElementById("level");
+                let newLevel = parseInt(levelElement.innerText) + 1;
+                levelElement.innerText = newLevel;
+                updateJobTitle(newLevel);
+                updateStats(newLevel);
+                levelUpAnimation();
+            }
+            
+            xpElement.innerText = `${currentXP} / ${maxXP}`;
+            let progressPercentage = (currentXP / maxXP) * 100;
+            xpBar.style.width = progressPercentage + "%";
+        }
     </script>
     <audio id="level-up-sound">
         <source src="https://files.catbox.moe/n5zb64.mp3" type="audio/mpeg">
