@@ -43,5 +43,32 @@
             <img src="https://via.placeholder.com/400x200?text=Graph+Preview" alt="Graph Preview">
         </div>
     </div>
+  <div class="panel">
+  <h2>Log Today's Performance</h2>
+  <form>
+    Reaction Time (ms):<br>
+    <input type="number" id="reaction"><br><br>
+
+    Memory Score (%):<br>
+    <input type="number" id="memory"><br><br>
+
+    Cognitive Speed (ms):<br>
+    <input type="number" id="cognitive"><br><br>
+
+    <button type="button" onclick="logPerformance()">Submit</button>
+  </form>
+</div>
+
+<script>
+function logPerformance() {
+  let reaction = document.getElementById('reaction').value;
+  let memory = document.getElementById('memory').value;
+  let cognitive = document.getElementById('cognitive').value;
+
+  alert(`Performance logged:\n- Reaction: ${reaction} ms\n- Memory: ${memory}%\n- Cognitive Speed: ${cognitive} ms`);
+
+  // Future enhancement: Save data automatically to track over time
+}
+</script>          
 </body>
 </html>
