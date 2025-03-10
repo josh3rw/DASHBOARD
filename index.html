@@ -280,6 +280,82 @@
             let progressPercentage = (currentXP / maxXP) * 100;
             xpBar.style.width = progressPercentage + "%";
         }
+    
+        function completeQuest(type) {
+            let xpReward = 0;
+            let questText;
+            if (type === 'daily') {
+                xpReward = 50;
+                questText = document.getElementById("daily-quest");
+            } else if (type === 'weekly') {
+                xpReward = 250;
+                questText = document.getElementById("weekly-quest");
+            } else if (type === 'monthly') {
+                xpReward = 1000;
+                questText = document.getElementById("monthly-quest");
+            }
+            
+            grantXP(xpReward);
+            questText.innerText = "✔️ Completed! +" + xpReward + " XP";
+            setTimeout(() => {
+                updateQuests();
+            }, 3000);
+        }
+        
+        function updateQuests() {
+            const dailyQuests = ["Complete 5 Reaction Drills", "Solve 3 Memory Puzzles", "Win a Speed Challenge"];
+            const weeklyQuests = ["Maintain 90% Memory Accuracy for a Week", "Complete 10 Reaction Training Sets", "Achieve 5 Perfect Runs"];
+            const monthlyQuests = ["Reach Level 5", "Complete 30 Training Days", "Win 20 Speed Challenges"];
+            
+            document.getElementById("daily-quest").innerText = dailyQuests[Math.floor(Math.random() * dailyQuests.length)];
+            document.getElementById("weekly-quest").innerText = weeklyQuests[Math.floor(Math.random() * weeklyQuests.length)];
+            document.getElementById("monthly-quest").innerText = monthlyQuests[Math.floor(Math.random() * monthlyQuests.length)];
+        }
+        
+        function storeGraphData(type, value) {
+            let data = JSON.parse(localStorage.getItem(type)) || [];
+            if (data.length >= 7) data.shift();
+            data.push(value);
+            localStorage.setItem(type, JSON.stringify(data));
+            renderGraph(type);
+        }
+        
+        function renderGraph(type) {
+            let data = JSON.parse(localStorage.getItem(type)) || [];
+            let canvas = document.getElementById(type + "Graph");
+            let ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = "cyan";
+            ctx.lineWidth = 2;
+            
+            ctx.beginPath();
+            for (let i = 0; i < data.length; i++) {
+                let x = (i + 1) * (canvas.width / (data.length + 1));
+                let y = canvas.height - (data[i] / 300) * canvas.height;
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.stroke();
+        }
+        
+        function logPerformance() {
+            let reactionValue = parseInt(document.getElementById("reaction").value) || 0;
+            let memoryValue = parseInt(document.getElementById("memory").value) || 0;
+            let cognitiveValue = parseInt(document.getElementById("cognitive").value) || 0;
+            
+            storeGraphData("reaction", reactionValue);
+            storeGraphData("memory", memoryValue);
+            storeGraphData("cognitive", cognitiveValue);
+            
+            updateProgress("reaction-bar", reactionValue);
+            updateProgress("memory-bar", memoryValue);
+            updateProgress("control-bar", cognitiveValue);
+            
+            grantXP(10);
+        }
     </script>
     <audio id="level-up-sound">
         <source src="https://files.catbox.moe/n5zb64.mp3" type="audio/mpeg">
