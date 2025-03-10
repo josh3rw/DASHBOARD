@@ -3,70 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Final Fantasy RPG Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: url('https://static.square-enix-games.com/ffviir-backdrops/ffviir-zoom-midgar-city.jpg') no-repeat center center fixed;
-            background-size: cover;
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #555;
+            border: none;
             color: white;
-            font-family: Arial, sans-serif;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        button:hover {
+            background-color: gold;
+            color: black;
+            transform: scale(1.1);
+        }
+        button:active {
+            transform: scale(1.05);
+        }
+        body {
+            background: url('https://static.square-enix-games.com/ffviir-backdrops/ffviir-zoom-midgar-city.jpg') no-repeat center center fixed; background-size: cover; color: white; font-family: 'Cinzel', serif;
         }
         .container { width: 80%; margin: auto; text-align: center; }
         .panel {
-            border: 3px solid;
-            border-color: gold;
-            border-image-slice: 1;
+            box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.5);
+            border: 3px solid gold;
             background-color: rgba(41, 41, 61, 0.9);
             padding: 15px;
             margin: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
         }
         .progress { background-color: #444; border-radius: 5px; overflow: hidden; }
         .progress-bar { height: 20px; background-color: cyan; }
         h1, h2 { color: gold; }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: center; margin-top: 10px; }
+        .quests { display: flex; justify-content: space-between; }
+        .graph-container { display: flex; justify-content: space-between; }
     </style>
-</head>
+<audio id="bg-music" autoplay loop>
+    <source src="https://files.catbox.moe/9dvwht.mp3" type="audio/mpeg">
+</audio></head>
 <body>
-    <div class="panel">
-        <h1>⚔️ Peak Performance RPG Dashboard ⚔️</h1>
+    <div class="panel container">
+        <h1>⚔️ Peak Performance ⚔️</h1>
 
         <div class="panel">
-            <h2>⚔️ Character Status</h2>
+            <div class="accent-symbol" style="position: absolute; top: 0; left: 0; border-top: 2px solid gold; border-left: 2px solid gold; border-radius: 10px; width: 15px; height: 15px;"></div><div class="accent-symbol" style="position: absolute; top: 0; left: 0; width: 50px; height: 50px; border-top: 3px solid gold; border-left: 3px solid gold; border-radius: 0 0 15px 0; transform: rotate(45deg);"></div><h2>⚔️ Character Status</h2>
             <p>Job: <strong id="rank">Novice</strong></p>
             <p>Level: <strong id="level">1</strong></p>
             <p>XP: <strong id="xp">0 / 100</strong></p>
-            <div class="progress" style="width: 100px; display: inline-block; margin-left: 10px;">
+            <div class="progress" style="width: 100px; margin: auto;">
                 <div class="progress-bar" id="xp-bar" style="width: 0%;"></div>
             </div>
-            
-            
-            
-            
-            
-            
-                
-            </p>
-            
-            
-            
-            
-            <p>Strength: <strong id="strength">1</strong></p>
-            <p>Intelligence: <strong id="intelligence">1</strong></p>
-            <p>Agility: <strong id="agility">1</strong></p>
-            <p>Defense: <strong id="defense">1</strong></p>
-            <p>Evasion: <strong id="evasion">1</strong></p>
-            
+            <div class="stat-grid">
+                <p>🗡️ Strength: <strong id="strength">1</strong></p>
+                <p>📚 Intelligence: <strong id="intelligence">1</strong></p>
+                <p>🏹 Agility: <strong id="agility">1</strong></p>
+                <p>🛡️ Defense: <strong id="defense">1</strong></p>
+                <p>🌀 Evasion: <strong id="evasion">1</strong></p>
+            </div>
         </div>
 
         <div class="panel">
-            <h2>🧠 Skill Progression</h2>
-            <div style="margin-bottom: 20px;">Reaction<div class="progress"><div class="progress-bar" id="reaction-bar" style="width:0%"></div></div></div>
-            <div style="margin-bottom: 20px;">Memory<div class="progress"><div class="progress-bar" id="memory-bar" style="width:0%;"></div></div></div>
-            <div style="margin-bottom: 20px;">Control<div class="progress"><div class="progress-bar" id="control-bar" style="width:0%;"></div></div></div>
-            <div style="margin-bottom: 20px;">Intuition<div class="progress"><div class="progress-bar" id="intuition-bar" style="width:0%;"></div></div></div>
+            <div class="accent-symbol" style="position: absolute; top: 0; right: 0; border-top: 2px solid gold; border-right: 2px solid gold; border-radius: 10px; width: 15px; height: 15px;"></div><div class="accent-symbol" style="position: absolute; top: 0; right: 0; width: 50px; height: 50px; border-top: 3px solid gold; border-right: 3px solid gold; border-radius: 0 0 0 15px; transform: rotate(45deg);"></div><h2>🧠 Skill Progression</h2>
+            <div style="margin-bottom: 15px;">Reaction<div class="progress"><div class="progress-bar" id="reaction-bar" style="width:0%"></div></div></div>
+            <div style="margin-bottom: 15px;">Memory<div class="progress"><div class="progress-bar" id="memory-bar" style="width:0%;"></div></div></div>
+            <div style="margin-bottom: 15px;">Control<div class="progress"><div class="progress-bar" id="control-bar" style="width:0%;"></div></div></div>
+            <div style="margin-bottom: 15px;">Intuition<div class="progress"><div class="progress-bar" id="intuition-bar" style="width:0%;"></div></div></div>
         </div>
 
-        <div class="panel quest">
-            <h2>📜 Quest Log</h2>
+        <div class="panel quests">
             <div class="panel">
                 <h3>🌟 Daily Quest</h3>
                 <p id="daily-quest">Loading...</p>
@@ -84,316 +93,35 @@
             </div>
         </div>
 
-        <div class="panel">
-            <h2 style="width: 100%; text-align: center; margin-bottom: 20px;">📊 Graphs</h2>
-            <div style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
-            <p style="color: gold;">Reaction Speed Over Time</p>
-            <canvas id="reactionGraph" style="margin-bottom: 20px;" width="400" height="200" style="background: white;"></canvas>
+        <div class="panel graph-container">
+            <div>
+                <p style="color: gold;">Reaction Speed</p>
+                <canvas id="reactionGraph" width="300" height="150"></canvas>
             </div>
-            <div style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
-            <p style="color: gold;">Memory Score Progression</p>
-            <canvas id="memoryGraph" style="margin-bottom: 20px;" width="400" height="200" style="background: white; margin-top: 20px;"></canvas>
+            <div>
+                <p style="color: gold;">Memory Progress</p>
+                <canvas id="memoryGraph" width="300" height="150"></canvas>
             </div>
-            <div style="display: flex; flex-direction: column; align-items: center;">
-            <p style="color: gold;">Cognitive Speed Trends</p>
-            <canvas id="cognitiveGraph" style="margin-bottom: 20px;" width="400" height="200" style="background: white; margin-top: 20px;"></canvas>
+            <div>
+                <p style="color: gold;">Cognitive Trends</p>
+                <canvas id="cognitiveGraph" width="300" height="150"></canvas>
+            </div>
         </div>
 
         <div class="panel">
-            <h2>📝 Log Today's Performance</h2>
+            <div class="accent-symbol" style="position: absolute; bottom: 0; left: 0; border-bottom: 2px solid gold; border-left: 2px solid gold; border-radius: 10px; width: 15px; height: 15px;"></div><h2>📝 Log Today's Performance</h2>
             <form>
-                Reaction Time (ms):<br>
-                <input type="number" id="reaction"><br><br>
-                Memory Score (%):<br>
-                <input type="number" id="memory"><br><br>
-                Cognitive Speed (ms):<br>
-                <input type="number" id="cognitive"><br><br>
-                <button type="button" onclick="logPerformance()">Submit</button>
-                <br><br>
-    
-    <br><br>
-    
-                <label>Did you exercise today?</label>
-    <br>
-    <input type="radio" id="exercise-yes" name="exercise" value="yes">
-    <label for="exercise-yes">Yes</label>
-    <input type="radio" id="exercise-no" name="exercise" value="no">
-    <label for="exercise-no">No</label><br>
-
-    <br><br>
-    <br><br>
-    <br><button type="button" onclick="checkExercise()">Confirm Exercise</button>
-    <p id="exercise-message" style="color: gold; margin-top: 10px;"></p>
-</form>
+                Reaction Time (ms):<br><input type="number" id="reaction"><br>
+                Memory Score (%):<br><input type="number" id="memory"><br>
+                Cognitive Speed (ms):<br><input type="number" id="cognitive"><br>
+                <button type="button" onclick="logPerformance()">Submit</button><br>
+                <label>Did you exercise today?</label><br>
+                <input type="radio" id="exercise-yes" name="exercise" value="yes"><label for="exercise-yes">Yes</label>
+                <input type="radio" id="exercise-no" name="exercise" value="no"><label for="exercise-no">No</label><br>
+                <button type="button" onclick="checkExercise()">Confirm Exercise</button>
+                <p id="exercise-message" style="color: gold;"></p>
+            </form>
         </div>
-    </div>
-    <audio id="bg-music" autoplay loop>
-        <source src="https://files.catbox.moe/9dvwht.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <script>
-        function levelUpAnimation() {
-            let levelUpDiv = document.createElement("div");
-            levelUpDiv.innerHTML = "🎉 LEVEL UP! 🎉";
-            levelUpDiv.style.position = "fixed";
-            levelUpDiv.style.top = "50%";
-            levelUpDiv.style.left = "50%";
-            levelUpDiv.style.transform = "translate(-50%, -50%)";
-            levelUpDiv.style.background = "gold";
-            levelUpDiv.style.color = "black";
-            levelUpDiv.style.padding = "20px";
-            levelUpDiv.style.fontSize = "24px";
-            levelUpDiv.style.fontWeight = "bold";
-            levelUpDiv.style.borderRadius = "10px";
-            levelUpDiv.style.boxShadow = "0px 0px 15px rgba(255, 215, 0, 0.7)";
-            levelUpDiv.style.zIndex = "1000";
-            document.body.appendChild(levelUpDiv);
-            
-            setTimeout(() => {
-                document.body.removeChild(levelUpDiv);
-            }, 3000);
-        }
-    
-        function updateJobTitle(level) {
-            let job;
-            if (level >= 99) job = "God";
-            else if (level >= 50) job = "Legendary Hero";
-            else if (level >= 40) job = "Battle Commander";
-            else if (level >= 30) job = "Grand Strategist";
-            else if (level >= 25) job = "Master Tactician";
-            else if (level >= 20) job = "Elite Knight";
-            else if (level >= 15) job = "Knight";
-            else if (level >= 10) job = "Warrior";
-            else if (level >= 5) job = "Apprentice";
-            else job = "Novice";
-            
-            document.getElementById("rank").innerText = job;
-        }
-    
-        function checkExercise() {
-            let message = document.getElementById("exercise-message");
-            let exerciseYes = document.getElementById("exercise-yes").checked;
-            if (exerciseYes) {
-                message.innerText = "✔️ You exercised today! +25 XP awarded.";
-            
-                let xpElement = document.getElementById("xp");
-                let xpBar = document.getElementById("xp-bar");
-                let currentXP = parseInt(xpElement.innerText.split("/")[0]);
-                let maxXP = parseInt(xpElement.innerText.split("/")[1]);
-                
-                currentXP += 25;
-                if (currentXP >= maxXP) {
-                    currentXP = currentXP - maxXP;
-                    let levelElement = document.getElementById("level");
-                    let newLevel = parseInt(levelElement.innerText) + 1;
-                    levelElement.innerText = newLevel;
-                    updateJobTitle(newLevel);
-                    levelUpAnimation();
-                }
-                
-                xpElement.innerText = `${currentXP} / ${maxXP}`;
-                let progressPercentage = (currentXP / maxXP) * 100;
-                xpBar.style.width = progressPercentage + "%";
-            }
-        }
-    
-        function updateStats(level) {
-            let strength = document.getElementById("strength");
-            let intelligence = document.getElementById("intelligence");
-            let agility = document.getElementById("agility");
-            let defense = document.getElementById("defense");
-            let evasion = document.getElementById("evasion");
-            
-            strength.innerText = Math.min(99, Math.floor(level * 1.2));
-            intelligence.innerText = Math.min(99, Math.floor(level * 1.1));
-            agility.innerText = Math.min(99, Math.floor(level * 1.3));
-            defense.innerText = Math.min(99, Math.floor(level * 1.25));
-            evasion.innerText = Math.min(99, Math.floor(level * 1.15));
-        }
-        
-        function updateJobTitle(level) {
-            let job;
-            if (level >= 99) job = "God";
-            else if (level >= 50) job = "Legendary Hero";
-            else if (level >= 40) job = "Battle Commander";
-            else if (level >= 30) job = "Grand Strategist";
-            else if (level >= 25) job = "Master Tactician";
-            else if (level >= 20) job = "Elite Knight";
-            else if (level >= 15) job = "Knight";
-            else if (level >= 10) job = "Warrior";
-            else if (level >= 5) job = "Apprentice";
-            else job = "Novice";
-            
-            document.getElementById("rank").innerText = job;
-            updateStats(level);
-        }
-    
-        function logPerformance() {
-            let reactionValue = parseInt(document.getElementById("reaction").value) || 0;
-            let memoryValue = parseInt(document.getElementById("memory").value) || 0;
-            let cognitiveValue = parseInt(document.getElementById("cognitive").value) || 0;
-            
-            updateGraph("reactionGraph", reactionValue);
-            updateGraph("memoryGraph", memoryValue);
-            updateGraph("cognitiveGraph", cognitiveValue);
-            
-            updateProgress("reaction-bar", reactionValue);
-            updateProgress("memory-bar", memoryValue);
-            updateProgress("control-bar", cognitiveValue);
-            
-            grantXP(10);
-        }
-        
-        function updateGraph(canvasId, newValue) {
-            let canvas = document.getElementById(canvasId);
-            let ctx = canvas.getContext("2d");
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = "gold";
-            ctx.fillRect(10, canvas.height - newValue, 50, newValue);
-        }
-        
-        function updateProgress(barId, value) {
-            let bar = document.getElementById(barId);
-            let percentage = Math.min(100, value);
-            bar.style.width = percentage + "%";
-        }
-        
-        function grantXP(amount) {
-            let xpElement = document.getElementById("xp");
-            let xpBar = document.getElementById("xp-bar");
-            let currentXP = parseInt(xpElement.innerText.split("/")[0]);
-            let maxXP = parseInt(xpElement.innerText.split("/")[1]);
-            
-            currentXP += amount;
-            if (currentXP >= maxXP) {
-                currentXP = currentXP - maxXP;
-                let levelElement = document.getElementById("level");
-                let newLevel = parseInt(levelElement.innerText) + 1;
-                levelElement.innerText = newLevel;
-                updateJobTitle(newLevel);
-                updateStats(newLevel);
-                levelUpAnimation();
-            }
-            
-            xpElement.innerText = `${currentXP} / ${maxXP}`;
-            let progressPercentage = (currentXP / maxXP) * 100;
-            xpBar.style.width = progressPercentage + "%";
-        }
-    
-        function completeQuest(type) {
-            let xpReward = 0;
-            let questText;
-            if (type === 'daily') {
-                xpReward = 50;
-                questText = document.getElementById("daily-quest");
-            } else if (type === 'weekly') {
-                xpReward = 250;
-                questText = document.getElementById("weekly-quest");
-            } else if (type === 'monthly') {
-                xpReward = 1000;
-                questText = document.getElementById("monthly-quest");
-            }
-            
-            grantXP(xpReward);
-            questText.innerText = "✔️ Completed! +" + xpReward + " XP";
-            setTimeout(() => {
-                updateQuests();
-            }, 3000);
-        }
-        
-        function updateQuests() {
-            const dailyQuests = ["Complete 5 Reaction Drills", "Solve 3 Memory Puzzles", "Win a Speed Challenge"];
-            const weeklyQuests = ["Maintain 90% Memory Accuracy for a Week", "Complete 10 Reaction Training Sets", "Achieve 5 Perfect Runs"];
-            const monthlyQuests = ["Reach Level 5", "Complete 30 Training Days", "Win 20 Speed Challenges"];
-            
-            document.getElementById("daily-quest").innerText = dailyQuests[Math.floor(Math.random() * dailyQuests.length)];
-            document.getElementById("weekly-quest").innerText = weeklyQuests[Math.floor(Math.random() * weeklyQuests.length)];
-            document.getElementById("monthly-quest").innerText = monthlyQuests[Math.floor(Math.random() * monthlyQuests.length)];
-        }
-        
-        function storeGraphData(type, value) {
-            let data = JSON.parse(localStorage.getItem(type)) || [];
-            if (data.length >= 7) data.shift();
-            data.push(value);
-            localStorage.setItem(type, JSON.stringify(data));
-            renderGraph(type);
-        }
-        
-        function renderGraph(type) {
-            let data = JSON.parse(localStorage.getItem(type)) || [];
-            let canvas = document.getElementById(type + "Graph");
-            let ctx = canvas.getContext("2d");
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = "cyan";
-            ctx.lineWidth = 2;
-            
-            ctx.beginPath();
-            for (let i = 0; i < data.length; i++) {
-                let x = (i + 1) * (canvas.width / (data.length + 1));
-                let y = canvas.height - (data[i] / 300) * canvas.height;
-                if (i === 0) {
-                    ctx.moveTo(x, y);
-                } else {
-                    ctx.lineTo(x, y);
-                }
-            }
-            ctx.stroke();
-        }
-        
-        function logPerformance() {
-            let reactionValue = parseInt(document.getElementById("reaction").value) || 0;
-            let memoryValue = parseInt(document.getElementById("memory").value) || 0;
-            let cognitiveValue = parseInt(document.getElementById("cognitive").value) || 0;
-            
-            storeGraphData("reaction", reactionValue);
-            storeGraphData("memory", memoryValue);
-            storeGraphData("cognitive", cognitiveValue);
-            
-            updateProgress("reaction-bar", reactionValue);
-            updateProgress("memory-bar", memoryValue);
-            updateProgress("control-bar", cognitiveValue);
-            
-            grantXP(10);
-        }
-    </script>
-    <audio id="level-up-sound">
-        <source src="https://files.catbox.moe/n5zb64.mp3" type="audio/mpeg">
-    </audio>
-    <script>
-        function levelUpAnimation() {
-            let levelUpDiv = document.createElement("div");
-            levelUpDiv.innerHTML = "🎉 LEVEL UP! 🎉";
-            levelUpDiv.style.position = "fixed";
-            levelUpDiv.style.top = "50%";
-            levelUpDiv.style.left = "50%";
-            levelUpDiv.style.transform = "translate(-50%, -50%)";
-            levelUpDiv.style.background = "gold";
-            levelUpDiv.style.color = "black";
-            levelUpDiv.style.padding = "20px";
-            levelUpDiv.style.fontSize = "24px";
-            levelUpDiv.style.fontWeight = "bold";
-            levelUpDiv.style.borderRadius = "10px";
-            levelUpDiv.style.boxShadow = "0px 0px 15px rgba(255, 215, 0, 0.7)";
-            levelUpDiv.style.zIndex = "1000";
-            document.body.appendChild(levelUpDiv);
-            
-            let bgMusic = document.getElementById("bg-music");
-            bgMusic.volume = 0.2; // Lower volume when level up sound plays
-            document.getElementById("level-up-sound").play();
-            setTimeout(() => {
-                bgMusic.volume = 1.0; // Restore volume after 3 seconds
-            }, 3000);
-            
-            setTimeout(() => {
-                document.body.removeChild(levelUpDiv);
-            }, 3000);
-        }
-    </script>
-    </div>
-        </div></div>
-        </div></div>
-        </div></div>
     </div>
 </body>
 </html>
