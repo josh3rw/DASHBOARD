@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=\"en\">
 <head>
-    <meta charset="UTF-8">
+    <meta charset=\"UTF-8\">
     <title>Final Fantasy RPG Dashboard</title>
     <style>
         body { background: #1e1e2e; color: white; font-family: Arial, sans-serif; }
@@ -13,62 +13,61 @@
     </style>
 </head>
 <body>
-    <div class="panel">
+    <div class=\"panel\">
         <h1>⚔️ Peak Performance RPG Dashboard ⚔️</h1>
 
-        <div class="panel">
+        <div class=\"panel\">
             <h2>Character Status</h2>
             <p>Level: <strong>12</strong></p>
             <p>XP: <strong>4750 / 5000</strong></p>
             <p>Rank: <strong>Elite Strategist</strong></p>
         </div>
 
-        <div class="panel">
+        <div class=\"panel\">
             <h2>Skill Progression</h2>
-            <div>Reaction<div class="progress"><div class="progress-bar" style="width:80%"></div></div>
-            <div>Memory<div class="progress"><div class="progress-bar" style="width:70%;"></div></div>
-            <div>Control<div class="progress"><div class="progress-bar" style="width:60%;"></div></div></div>
-            <div>Intuition<div class="progress"><div class="progress-bar" style="width:65%;"></div></div></div>
+            <div>Reaction<div class=\"progress\"><div class=\"progress-bar\" style=\"width:80%\"></div></div>
+            <div>Memory<div class=\"progress\"><div class=\"progress-bar\" style=\"width:70%;\"></div></div>
+            <div>Control<div class=\"progress\"><div class=\"progress-bar\" style=\"width:60%;\"></div></div></div>
+            <div>Intuition<div class=\"progress\"><div class=\"progress-bar\" style=\"width:65%;\"></div></div></div>
         </div>
 
-        <div class="panel quest">
+        <div class=\"panel quest\">
             <h2>Current Quest</h2>
             <p>Complete Daily Reaction Drills</p>
             <p>Progress: <strong>3 / 5</strong> Drills Completed</p>
             <p>Reward: <strong>+250 XP</strong></p>
         </div>
 
-        <div class="panel">
+        <div class=\"panel\">
             <h2>Weekly Reaction Speed</h2>
-            <img src="https://via.placeholder.com/400x200?text=Graph+Preview" alt="Graph Preview">
+            <img src=\"https://via.placeholder.com/400x200?text=Graph+Preview\" alt=\"Graph Preview\">
         </div>
+
+        <div class=\"panel\">
+            <h2>Log Today's Performance</h2>
+            <form>
+                Reaction Time (ms):<br>
+                <input type=\"number\" id=\"reaction\"><br><br>
+
+                Memory Score (%):<br>
+                <input type=\"number\" id=\"memory\"><br><br>
+
+                Cognitive Speed (ms):<br>
+                <input type=\"number\" id=\"cognitive\"><br><br>
+
+                <button type=\"button\" onclick=\"logPerformance()\">Submit</button>
+            </form>
+        </div>
+
+        <script>
+            function logPerformance() {
+                let reaction = document.getElementById('reaction').value;
+                let memory = document.getElementById('memory').value;
+                let cognitive = document.getElementById('cognitive').value;
+
+                alert(`Performance logged:\n- Reaction: ${reaction} ms\n- Memory: ${memory}%\n- Cognitive Speed: ${cognitive} ms`);
+            }
+        </script>
     </div>
-  <div class="panel">
-  <h2>Log Today's Performance</h2>
-  <form>
-    Reaction Time (ms):<br>
-    <input type="number" id="reaction"><br><br>
-
-    Memory Score (%):<br>
-    <input type="number" id="memory"><br><br>
-
-    Cognitive Speed (ms):<br>
-    <input type="number" id="cognitive"><br><br>
-
-    <button type="button" onclick="logPerformance()">Submit</button>
-  </form>
-</div>
-
-<script>
-function logPerformance() {
-  let reaction = document.getElementById('reaction').value;
-  let memory = document.getElementById('memory').value;
-  let cognitive = document.getElementById('cognitive').value;
-
-  alert(`Performance logged:\n- Reaction: ${reaction} ms\n- Memory: ${memory}%\n- Cognitive Speed: ${cognitive} ms`);
-
-  // Future enhancement: Save data automatically to track over time
-}
-</script>          
 </body>
 </html>
