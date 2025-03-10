@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang=\"en\">
+<html lang="en">
 <head>
-    <meta charset=\"UTF-8\">
+    <meta charset="UTF-8">
     <title>Final Fantasy RPG Dashboard</title>
     <style>
         body {
@@ -18,58 +18,80 @@
     </style>
 </head>
 <body>
-    <div class=\"panel\">
+    <div class="panel">
         <h1>⚔️ Peak Performance RPG Dashboard ⚔️</h1>
 
-        <div class=\"panel\">
+        <div class="panel">
             <h2>Character Status</h2>
-            <p>Level: <strong>12</strong></p>
-            <p>XP: <strong>4750 / 5000</strong></p>
-            <p>Rank: <strong>Elite Strategist</strong></p>
+            <p>Level: <strong id="level">1</strong></p>
+            <p>XP: <strong id="xp">0 / 100</strong></p>
+            <p>Rank: <strong id="rank">Novice</strong></p>
         </div>
 
-        <div class=\"panel\">
+        <div class="panel">
             <h2>Skill Progression</h2>
-            <div>Reaction<div class=\"progress\"><div class=\"progress-bar\" style=\"width:80%\"></div></div>
-            <div>Memory<div class=\"progress\"><div class=\"progress-bar\" style=\"width:70%;\"></div></div>
-            <div>Control<div class=\"progress\"><div class=\"progress-bar\" style=\"width:60%;\"></div></div></div>
-            <div>Intuition<div class=\"progress\"><div class=\"progress-bar\" style=\"width:65%;\"></div></div></div>
+            <div>Reaction<div class="progress"><div class="progress-bar" id="reaction-bar" style="width:0%"></div></div>
+            <div>Memory<div class="progress"><div class="progress-bar" id="memory-bar" style="width:0%;"></div></div>
+            <div>Control<div class="progress"><div class="progress-bar" id="control-bar" style="width:0%;"></div></div></div>
+            <div>Intuition<div class="progress"><div class="progress-bar" id="intuition-bar" style="width:0%;"></div></div></div>
         </div>
 
-        <div class=\"panel quest\">
+        <div class="panel quest">
             <h2>Current Quest</h2>
             <p>Complete Daily Reaction Drills</p>
-            <p>Progress: <strong>3 / 5</strong> Drills Completed</p>
-            <p>Reward: <strong>+250 XP</strong></p>
+            <p>Progress: <strong id="quest-progress">0 / 5</strong> Drills Completed</p>
+            <p>Reward: <strong>+50 XP</strong></p>
         </div>
 
-        <div class=\"panel\">
+        <div class="panel">
             <h2>Weekly Reaction Speed</h2>
-            <img src=\"https://via.placeholder.com/400x200?text=Graph+Preview\" alt=\"Graph Preview\">
+            <canvas id="reactionGraph" width="400" height="200" style="background: white;"></canvas>
         </div>
 
-        <div class=\"panel\">
+        <div class="panel">
             <h2>Log Today's Performance</h2>
             <form>
                 Reaction Time (ms):<br>
-                <input type=\"number\" id=\"reaction\"><br><br>
+                <input type="number" id="reaction"><br><br>
 
                 Memory Score (%):<br>
-                <input type=\"number\" id=\"memory\"><br><br>
+                <input type="number" id="memory"><br><br>
 
                 Cognitive Speed (ms):<br>
-                <input type=\"number\" id=\"cognitive\"><br><br>
+                <input type="number" id="cognitive"><br><br>
 
-                <button type=\"button\" onclick=\"logPerformance()\">Submit</button>
+                <button type="button" onclick="logPerformance()">Submit</button>
             </form>
         </div>
 
         <script>
+            let xp = 0;
+            let level = 1;
+            let questProgress = 0;
+
             function logPerformance() {
                 let reaction = document.getElementById('reaction').value;
                 let memory = document.getElementById('memory').value;
                 let cognitive = document.getElementById('cognitive').value;
-
+                
+                xp += 50;
+                questProgress++;
+                
+                if (xp >= 100) {
+                    xp = 0;
+                    level++;
+                    document.getElementById('rank').innerText = "Warrior";
+                }
+                
+                document.getElementById('xp').innerText = `${xp} / 100`;
+                document.getElementById('level').innerText = level;
+                document.getElementById('quest-progress').innerText = `${questProgress} / 5`;
+                
+                document.getElementById('reaction-bar').style.width = `${reaction / 5}%`;
+                document.getElementById('memory-bar').style.width = `${memory}%`;
+                document.getElementById('control-bar').style.width = `${cognitive / 5}%`;
+                document.getElementById('intuition-bar').style.width = `${(reaction + memory + cognitive) / 15}%`;
+                
                 alert(`Performance logged:\n- Reaction: ${reaction} ms\n- Memory: ${memory}%\n- Cognitive Speed: ${cognitive} ms`);
             }
         </script>
